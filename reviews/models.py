@@ -8,6 +8,9 @@ class Publisher(models.Model):
     website = models.URLField(help_text="The Publisher's website.")
     email = models.EmailField(help_text="The Publisher's email address.")
 
+    def __str__(self):
+        return self.name
+
 
 class Book(models.Model):
     """A published book."""
@@ -19,6 +22,9 @@ class Book(models.Model):
     # many-to-many relationship
     contributors = models.ManyToManyField('Contributor', through="BookContributor")
 
+    def __str__(self):
+        return self.title
+
 
 class Contributor(models.Model):
     """
@@ -28,6 +34,9 @@ class Contributor(models.Model):
     first_names = models.CharField(max_length=50, help_text="The contributor's first name or names.")
     last_names = models.CharField(max_length=50, help_text="The contributor's last name or names.")
     email = models.EmailField(help_text="The contact email for the contributor.")
+
+    def __str__(self):
+        return self.first_names
 
 
 class BookContributor(models.Model):
