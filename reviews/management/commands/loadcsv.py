@@ -13,7 +13,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--csv', type=str)
 
-
     @staticmethod
     def row_to_dict(row, header):
         if len(row) < len(header):
