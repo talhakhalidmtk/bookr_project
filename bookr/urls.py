@@ -16,10 +16,18 @@ Including another URLconf
 from django.contrib import admin
 # from reviews.admin import admin_site
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
+from bookr.views import profile
 from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include(('django.contrib.auth.urls', 'auth'),
+             namespace='accounts')),
+    path('accounts/profile/', profile, name='profile'),
     path('', include('reviews.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
