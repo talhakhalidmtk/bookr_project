@@ -93,6 +93,7 @@ def book_detail(request, pk):
 def is_staff_user(user):
     return user.is_staff
 
+
 @user_passes_test(is_staff_user)
 def publisher_edit(request, pk=None):
     if pk is not None:
@@ -180,4 +181,4 @@ def book_media(request, pk):
         form = BookMediaForm(instance=book)
 
     return render(request, "reviews/instance-form.html",
-                  {"instance": book, "form": form, "model_type": "Book", "is_file_upload": True})
+                  {"instance": book, "form": form, "model_type": "Book"})

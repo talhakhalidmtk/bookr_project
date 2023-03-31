@@ -12,7 +12,6 @@ class Publisher(models.Model):
     def __str__(self):
         return self.name
 
-
 class Book(models.Model):
     """A published book."""
     title = models.CharField(max_length=70,
@@ -27,7 +26,6 @@ class Book(models.Model):
                                           through="BookContributor")
     cover = models.ImageField(null=True, blank=True, upload_to="book_covers/")
     sample = models.FileField(null=True, blank=True, upload_to="book_samples/")
-
     def __str__(self):
         return "{} ({})".format(self.title, self.isbn)
 
@@ -49,6 +47,9 @@ class Contributor(models.Model):
     def __str__(self):
         return self.initialled_name()
 
+    def number_contributions(self):
+        return self.bookcontributor_set.count()
+
 
 class BookContributor(models.Model):
     class ContributionRole(models.TextChoices):
@@ -63,7 +64,6 @@ class BookContributor(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.contributor, self.role)
-
 
 class Review(models.Model):
     content = models.TextField(help_text="The Review text.")
